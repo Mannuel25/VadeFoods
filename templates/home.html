@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<br>
+<section class="text-dark p-5 p-lg-0 pt-lg-5 text-sm-start">
+    <div class="container d-none d-sm-block">
+        <div class="d-sm-flex align-items-center justify-content-between">
+            <div>
+                <h1 style="font-size: 27px;">Crafting Memorable food moments</h1>
+                <p class="lead my-4" style="font-size: 25px;">
+                    One Bite at a Time!
+                </p><br>
+                <div style="text-align: left;">
+                    <a class="btn btn-primary btn-lg" href="{% url 'signup' %}" role="button"
+                        style="border-radius: 11px; background-color: rgb(36, 125, 214) !important; border-color: rgb(36, 125, 214);">Get
+                        Started</a>
+                </div>
+            </div>
+            <a class="navbar-brand" href="#">
+                <img src="{% static 'images/undraw_breakfast_psiw.svg' %}" alt="Logo" class="img-fluid navbar-logo">
+                <!-- Replace "your_logo_image.png" with your image file path -->
+            </a>
+        </div>
+    </div>
+    <div class="d-block d-sm-none align-items-center">
+        <div style="text-align: center;">
+            <h1>Lorem ipsum</h1>
+            <p class="lead my-4" style="font-size: 25px;">
+                One Bite at a Time!
+            </p><br>
+        </div>
+        <div style="text-align: center;">
+            <img class="img-fluid h-20" src="{% static 'images/undraw_breakfast_psiw.svg' %}" />
+            <br><br>
+            <a class="btn btn-primary btn-lg" href="{% url 'signup' %}" role="button"
+                style="border-radius: 11px; background-color: rgb(36, 125, 214) !important; border-color: rgb(36, 125, 214);">Get
+                Started</a>
+        </div>
+    </div>
+    <br><br>
+</section>
+
+{% endblock content %}

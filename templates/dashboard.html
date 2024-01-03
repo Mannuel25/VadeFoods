@@ -1,0 +1,105 @@
+{% load crispy_forms_tags %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard - Vade Foods</title>
+  <link rel="stylesheet" href="{% static 'css/main_navbar.css' %}">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+      integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+  <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
+  <link href='https://unpkg.com/boxicons@2.1.2/css/boxicons.min.css' rel='stylesheet'>
+
+</head>
+
+<body>
+    {% include 'main_navbar.html' %}
+    <div class="deals time">
+        <i class='bx bx-bowl-hot' id="icon" style="color: black; margin-bottom: -33px; margin-right: -130px;"></i>
+        <h1 style="margin-left: 140px;" class="clothing-heading">Quick Menu</h1>
+    </div>
+    <div class="product-container">
+        <div class="product-card">
+          <img src="/media/food_images/Jollof_Spagetti.jpeg" alt="" class="product-image" style="height: 100%;">
+          <a href="{% url 'foods' %}" style="text-decoration: none; color: black;"><h3 class="product-name">Jollof Spaghetti</h3></a>
+          <div class="product-price">
+            <a href="{% url 'foods' %}" style="text-decoration: none;"><span class="discount-price">₦450</span></a>
+          </div>
+        </div>
+        <div class="product-card">
+          <img src="/media/drinks_images/Strawberry_Milk_Shake.jpeg" alt="" class="product-image" style="height: 100%;">
+          <a href="{% url 'drinks' %}" style="text-decoration: none; color: black;">
+            <h3 class="product-name">Strawberry Milk Shake</h3>
+          </a>
+          <div class="product-price">
+            <a href="{% url 'proteins' %}" style="text-decoration: none;"><span class="original-price">₦2200</span></a>
+            <a href="{% url 'proteins' %}" style="text-decoration: none;"><span class="discount-price">₦1950</span></a>
+          </div>
+        </div>
+        <div class="product-card">
+          <img src="/media/proteins_images/Fried-Chicken.jpg" alt="" class="product-image" style="height: 100%;">
+          <a href="{% url 'proteins' %}" style="text-decoration: none; color: black;">
+            <h3 class="product-name">Fried Chicken</h3>
+          </a>
+          <div class="product-price">
+            <a href="{% url 'proteins' %}" style="text-decoration: none;"><span class="original-price">₦2400</span></a>
+            <a href="{% url 'proteins' %}" style="text-decoration: none;"><span class="discount-price">₦2150</span></a>
+          </div>
+        </div>
+        <div class="product-card">
+          <img src="/media/food_images/Moi-Moi.jpg" alt="" class="product-image"
+            style="height: 100%;">
+            <a href="{% url 'foods' %}" style="text-decoration: none; color: black;">
+              <h3 class="product-name">Moi-Moi</h3>
+          </a>
+          <div class="product-price">
+            <a href="{% url 'foods' %}" style="text-decoration: none;"><span class="discount-price">₦200</span></a>
+          </div>
+        </div>
+    </div>   
+    <div class="product-container">
+        <div class="product-card">
+            <img src="/media/drinks_images/Strawberry_Milk_Shake.jpeg" alt="" class="product-image" style="height: 100%;">
+            <a href="{% url 'drinks' %}" style="text-decoration: none; color: black;">
+              <h3 class="product-name">Strawberry Milk Shake</h3>
+            </a>
+            <div class="product-price">
+              <a href="{% url 'pastries' %}" style="text-decoration: none;"><span class="original-price">₦2200</span></a>
+              <a href="{% url 'pastries' %}" style="text-decoration: none;"><span class="discount-price">₦1950</span></a>
+            </div> 
+        </div>
+        <div class="product-card">
+          <img src="/media/pastries_images/Doughnut.jpeg" alt="Product Name" class="product-image" style="height: 100%;">
+          <a href="{% url 'pastries' %}" style="text-decoration: none; color: black;">
+            <h3 class="product-name">Doughnut</h3>
+          </a>
+          <div class="product-price">
+            <a href="{% url 'pastries' %}" style="text-decoration: none;"><span class="original-price">₦600</span></a>
+            <a href="{% url 'pastries' %}" style="text-decoration: none;"><span class="discount-price">₦550</span></a>
+          </div>  
+        </div>
+        <div class="product-card">
+            <img src="/media/morsels_images/pounded-.jpg" alt="Product Name" class="product-image" style="height: 100%;">
+            <a href="{% url 'morsels' %}" style="text-decoration: none; color: black;">
+              <h3 class="product-name">Pounded Yam</h3>
+            </a>
+            <div class="product-price">
+              <a href="{% url 'morsels' %}" style="text-decoration: none;"><span class="discount-price">₦950</span></a>
+            </div>  
+        </div>
+        <div class="product-card">
+            <img src="/media/drinks_images/aquafina_bottle_water.jpg" alt="Product Name" class="product-image" style="height: 100%;">
+            <a href="{% url 'drinks' %}" style="text-decoration: none; color: black;">
+              <h3 class="product-name">Aquafina Bottle Water</h3>
+            </a>
+            <div class="product-price">
+              <a href="{% url 'drinks' %}" style="text-decoration: none;"><span class="discount-price">₦400</span></a>
+            </div>
+        </div>
+    <script src="{% static 'js/main_navbar.js' %}"></script>
+</body>
+</html>

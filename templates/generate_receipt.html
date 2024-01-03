@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vade Foods Receipt</title>
+    <style>
+
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 5px;
+        }
+
+        .container {
+            max-width: 600px;
+            border-radius: 5px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        h1 {
+            color: #333;
+            text-align: center;
+            margin-bottom: 10px;
+            font-size: 20px;
+        }
+
+        .receipt-details {
+            margin-top: 20px;
+        }
+
+        .receipt-details table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+        }
+
+        .receipt-details th, .receipt-details td {
+            border: 1px solid #ccc;
+            padding: 8px;
+            text-align: left;
+            font-size: 16.5px;
+        }
+
+        .receipt-total {
+            margin-top: 20px;
+        }
+
+        .receipt-total table {
+            width: 50%;
+        }
+
+        .receipt-total th, .receipt-total td {
+            text-align: right;
+            padding: 5px;
+            font-size: 16.5px;
+        }
+        .logo {
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="logo">
+            <img src="https://res.cloudinary.com/dq5fvxkeo/image/upload/v1694036817/1694036694055_rwzjil.png" alt="Vade Foods Logo" width="150" height="150">
+        </div>
+        <h1>Purchase Receipt</h1>
+        <p style="font-size: 16.5px;">Date: <span id="receipt-date">{{ today_date }}</span></p>
+        <p style="font-size: 16.5px;">Time: <span id="receipt-date">{{ time_generated }}</span></p>
+        <p style="font-size: 16.5px;">Invoice Number: <span id="order-number">{{ invoice_number }}</span></p>
+        <p style="font-size: 16.5px;">Customer: <span id="receipt-date">{{ name }}</span></p>
+
+        <div class="receipt-details">
+            <h2 style="font-size: 17.5px;">Purchase Details</h2>
+            <table>
+                <tr>
+                    <th>Item</th>
+                    <th>Quantity</th>
+                    <th>Price</th>
+                    <th>Total</th>
+                </tr>
+                <!-- Add rows for each purchased item -->
+                {% for item in items %}
+                    <tr>
+                        <td>{{ item.name }}</td>
+                        <td>{{ item.no_of_orders }}</td>
+                        {% if item.discounted_price %}
+                            <td><img width="14" height="14" src="https://img.icons8.com/material-rounded/24/naira.png" alt="naira" />{{ item.discounted_price }}</td>
+                        {% else %}
+                            <td><img width="14" height="14" src="https://img.icons8.com/material-rounded/24/naira.png" alt="naira" />{{ item.price }}</td>
+                        {% endif %}
+                        {% if item.total_amount %}
+                            <td><img width="14" height="14" src="https://img.icons8.com/material-rounded/24/naira.png" alt="naira" />{{ item.total_amount }}</td>
+                        {% else %}
+                            {% if item.discounted_price %}
+                                <td><img width="14" height="14" src="https://img.icons8.com/material-rounded/24/naira.png" alt="naira" />{{ item.discounted_price }}</td>
+                            {% else %}
+                                <td><img width="14" height="14" src="https://img.icons8.com/material-rounded/24/naira.png" alt="naira" />{{ item.price }}</td>
+                            {% endif %}
+                        {% endif %}
+                    </tr>
+                {% endfor %}
+            </table>
+        </div>
+
+        <div class="receipt-total">
+            <table>
+                <tr>
+                    <th>Subtotal:</th>
+                    <td><img width="14" height="14" src="https://img.icons8.com/material-rounded/24/naira.png" alt="naira" />{{ cart_total_amount }}</td>
+                </tr>
+                <tr>
+                    <th>Tax (0%):</th>
+                    <td><img width="14" height="14" src="https://img.icons8.com/material-rounded/24/naira.png" alt="naira" />0</td>
+                </tr>
+                <tr>
+                    <th>Total:</th>
+                    <td><img width="14" height="14" src="https://img.icons8.com/material-rounded/24/naira.png" alt="naira" />{{ cart_total_amount }}</td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</body>
+
+</html>

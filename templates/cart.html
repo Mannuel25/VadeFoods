@@ -1,0 +1,154 @@
+{% load crispy_forms_tags %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Cart - Vade Foods{% endblock title %}</title>
+    <link rel="stylesheet" href="{% static 'css/food.css' %}">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
+    <link href='https://unpkg.com/boxicons@2.1.2/css/boxicons.min.css' rel='stylesheet'>
+    <style>
+        .styled-button {
+            display: block;
+            width: 100%;
+            padding: 10px 0;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 12px;
+            font-size: 25px;
+            cursor: pointer;
+        }
+        .styled-button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+
+<body>
+    {% include 'main_navbar.html' %}
+    <section class="home-section" style="background-color: white;" id="btn">
+        <div class="text" style="margin-left: 34px;">
+            <legend class="title heading">Cart</legend>
+        </div>
+    </section>
+
+    <div class="product-container">
+        {% for item in cart %}
+        <div class="product-card">
+            <img src="../media/{{item.image_name}}" alt="Product Name" class="product-image"
+                style="height: 100%;">            
+            <h3 class="product-name">{{ item.name }}</h3>
+            {% if item.discounted_price %}
+            <div class="product-price">
+                <span class="discount-price">₦{{ item.discounted_price}}</span>
+            </div>
+            {% else %}
+            <div class="product-price">₦{{ item.price }}</div>
+            {% endif %}
+            <div><p class="quantity-text">Quantity: {{ item.no_of_orders }}</p></div>
+            {% if item.total_amount %}
+            <div class="quantity-text" style="font-weight: bold;">Total Amount: ₦{{ item.total_amount }}</div>
+            {% endif %}
+            <br>
+            <form method="get" class="qty-btns"> 
+                <div class="add_cart">
+                    <button type="submit" value="{{item.name}}" name="reduce_quantity" class="cart-icon" title="Reduce Quantity">
+                        <i class='bx bx-minus add-to-cart-button' id="cort"></i>
+                    </button>
+                    <button type="submit" value="{{item.name}}" name="increase_quantity" class="cart-icon" title="Increase Quantity">
+                        <i class='bx bx-plus add-to-cart-button' id="cort"></i>
+                    </button>
+                    <a href="{% url 'delete_cart_items' item.id %}"><button type="button" class="cart-icon" title="Delete from cart">
+                            <i class='bx bx-trash add-to-cart-button' id="cort"></i>
+                        </button></a>
+                </div>
+            </form>
+        </div>
+        {% endfor %}
+    </div>
+    {% if cart %}
+        <div class="button-container">
+            <button type="button" class="btn btn-primary styled-button" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+                Checkout <i class='bx bx-cart-alt' style="font-size: 20px;"></i>
+            </button>
+        </div>
+    {% endif %}
+
+    <!-- Checkout Modal -->
+    <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+        aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title text-center" id="staticBackdropLabel" style="font-size: 24px; font-weight: bold;">Checkout</h4>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    {% for item in cart %}
+                        <h3 style="font-size: 20px; font-weight: bold;">{{ item.name }}</h3>
+                        <div>
+                            <p>Quantity: {{ item.no_of_orders }}</p>
+                        </div>
+                        {% if item.total_amount %}
+                            <p style="font-weight: bold;">Amount: ₦{{ item.total_amount }}</p>
+                        {% else %}
+                            <p style="font-weight: bold;">Amount: ₦{{ item.price }}</p>
+                        {% endif %}
+                        <hr>
+                    {% endfor %}
+                    <p style="font-weight: bolder;font-size: 21.5px;text-align: center;">Total Amount: ₦{{ cart_total_amount }}</p>
+                </div>
+                <div class="modal-footer">
+                    <a href="{% url 'purchase' %}" style="text-decoration: none;">
+                        <button type="button" class="btn btn-success" data-bs-toggle="modal"data-bs-target="#exampleModal">Confirm Order
+                            <i class='bx bx-money' id="cort" style="font-size: 17px;"></i>
+                        </button>
+                    </a>
+                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cancel</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--Confirm Order Modal-->
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <form method="get">
+                        <i class='bx bx-x' box-shadow="none" name="purchase" value="{{item.name}}" data-bs-dismiss="modal"
+                            style="font-size: 34px; margin-left: 420px;"></i>
+                </div>
+                </form>
+                <div class="modal-body">
+                    <p>Purchase Successful <i class='bx bx-check-circle' style="font-size: 24px; font-weight: bold;"></i></p>
+                    </a>
+                    <p>Your receipt will be made available for download shortly.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- JavaScript function to refresh the page -->
+    <script>
+        function refreshPage() {
+            location.reload();
+        }
+    </script>
+</body>
+<script src="{% static 'js/script.js' %}"></script>
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+    integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+    crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4"
+    crossorigin="anonymous"></script>
+
+</html>
