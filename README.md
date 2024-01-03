@@ -9,7 +9,7 @@
 - **Bootstrap 🅱️**
 - **PostgreSQL 🐘**
 
-## Features
+## Features 🚀
 
 ### User Roles
 1. **Admin 👩‍💼👨‍💼:** 
@@ -30,7 +30,7 @@
     - 🥤 Drinks
     - 🍡 Morsels
 
-### Receipt Download
+### Receipt Download 📜
 - After completing a purchase, users have the option to download a receipt for their records.
 
 ## Getting Started 🚗
