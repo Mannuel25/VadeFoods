@@ -31,7 +31,7 @@
     - 🍡 Morsels
 
 ### Receipt Download 📜
-- After completing a purchase, users have the option to download a receipt for their records.
+- After completing a purchase, users have the option to download a receipt for their order.
 
 ## Getting Started 🚗
 
