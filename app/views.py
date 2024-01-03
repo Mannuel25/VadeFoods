@@ -296,66 +296,6 @@ def delete_cart_items(request, id):
     item.delete()
     return redirect('cart')
 
-@login_required(login_url='login')
-@for_admins
-def inventory(request):
-    if request.method == 'GET':
-        all_food_items = SoldFoodItems.objects.filter(category="food")
-        all_proteins_items = SoldFoodItems.objects.filter(category="proteins")
-        all_drinks_items = SoldFoodItems.objects.filter(category="drinks")
-        all_pastries_items = SoldFoodItems.objects.filter(category="pastries")
-        all_morsels_items = SoldFoodItems.objects.filter(category="morsels")
-
-        popular_food = all_food_items.order_by('-no_of_orders')[0] if len(all_food_items) > 0 else all_food_items
-        least_popular_food = all_food_items.order_by('no_of_orders')[0] if len(all_food_items) > 0 else all_food_items
-        if popular_food == least_popular_food:
-            popular_food, least_popular_food = None, None
-
-        popular_protein = all_proteins_items.order_by('-no_of_orders')[0] if len(all_proteins_items) > 0 else all_proteins_items
-        least_popular_protein = all_proteins_items.order_by('no_of_orders')[0] if len(all_proteins_items) > 0 else all_proteins_items
-        if popular_protein == least_popular_protein:
-            popular_protein, least_popular_protein = None, None
-
-        popular_drink = all_drinks_items.order_by('-no_of_orders')[0] if len(all_drinks_items) > 0 else all_drinks_items
-        least_popular_drink = all_drinks_items.order_by('no_of_orders')[0] if len(all_drinks_items) > 0 else all_drinks_items
-        if popular_drink == least_popular_drink:
-            popular_drink, least_popular_drink = None, None
-
-        popular_pastry = all_pastries_items.order_by('-no_of_orders')[0] if len(all_pastries_items) > 0 else all_pastries_items
-        least_popular_pastry = all_pastries_items.order_by('no_of_orders')[0] if len(all_pastries_items) > 0 else all_pastries_items
-        if popular_pastry == least_popular_pastry:
-            popular_pastry, least_popular_pastry = None, None
-
-        popular_morsel = all_morsels_items.order_by('-no_of_orders')[0] if len(all_morsels_items) > 0 else all_morsels_items
-        least_popular_morsel = all_morsels_items.order_by('no_of_orders')[0] if len(all_morsels_items) > 0 else all_morsels_items
-        if popular_morsel == least_popular_morsel:
-            popular_morsel, least_popular_morsel = None, None
-
-        search_input = request.GET.get('search_input')
-        if search_input:
-            items = SoldFoodItems.objects.filter(food_name__icontains=search_input)
-            if items:
-                items_cat = items.first().category
-            else:
-                items, items_cat = {}, None
-        else:
-            items, items_cat = {}, None
-
-        context = {
-            'popular_food': popular_food,
-            'popular_protein' : popular_protein,
-            'popular_drink' : popular_drink,
-            'popular_pastry' : popular_pastry,
-            'popular_morsel' : popular_morsel,
-            'least_popular_food': least_popular_food,
-            'least_popular_protein' : least_popular_protein,
-            'least_popular_drink' : least_popular_drink,
-            'least_popular_pastry' : least_popular_pastry,
-            'least_popular_morsel' : least_popular_morsel,
-            'items' : items,
-            'item_category' : items_cat,
-        }
-        return render(request, 'inventory.html', context)
 
 def purchase_item(request):
     for item in Cart.objects.filter(customer=request.user):

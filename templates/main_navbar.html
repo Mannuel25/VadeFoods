@@ -30,7 +30,6 @@
                             <a href="{% url 'drinks' %}">Drinks</a>
                             <a href="{% url 'morsels' %}">Morsels</a>
                             {% if request.user.is_superuser %}
-                            <a href="{% url 'inventory' %}">Inventory</a>
                             {% endif %}
                         </div>
                     </li>
