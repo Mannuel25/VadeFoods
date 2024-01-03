@@ -54,6 +54,7 @@
 2. Log in as an admin or a normal user.
 3. Explore the menu, add items to the cart, and complete the purchase.
 4. Download the receipt for your purchase.
+5. You can find the app screenshots [here](./screenshots).
 
 ## License 📄
 This project is licensed under the [MIT License](LICENSE).
