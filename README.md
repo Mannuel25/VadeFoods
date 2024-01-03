@@ -2,7 +2,7 @@
 
 **VadeFoods** is a web application that simplifies the process of ordering food for customers. It provides a platform where users can browse through a variety of food items. The application facilitates easy management for administrators to add new items, set prices, and specify the available quantity.
 
-## Technologies Used
+## Technologies Used 🛠️
 - **Python 🐍**
 - **Django 🌐**
 - **HTML/CSS 🎨**
